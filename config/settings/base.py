@@ -38,7 +38,6 @@ SECRET_KEY = config('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    'django_extensions',
     'decouple',
     'accounts',
     'movies',
@@ -137,8 +136,3 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 LIGIN_URL = '/accounts/login/'
 AUTH_USER_MODEL = 'accounts.User'
-
-# GRAPH_MODELS = {
-#   'all_applications': True,
-#   'graph_models': True,
-# }

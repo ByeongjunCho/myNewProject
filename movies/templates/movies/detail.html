@@ -16,6 +16,68 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://kit.fontawesome.com/54e342cbc4.js" crossorigin="anonymous"></script>
+
+
+
+  <link rel="stylesheet" href="{% static 'css/html5reset-1.6.1.css' %}" type="text/css" media="screen,print">
+	<link rel="stylesheet" rel="stylesheet"href="{% static 'css/novacancy.css' %}"  type="text/css">
+	<script type="text/javascript" src="{% static 'js/jquery.novacancy.js' %}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#no').novacancy({
+				'reblinkProbability': 0.1,
+				'blinkMin': 0.2,
+				'blinkMax': 0.6,
+				'loopMin': 8,
+				'loopMax': 10,
+				'color': '#ffffff',
+				'glow': ['0 0 80px #ffffff', '0 0 30px #008000', '0 0 6px #0000ff']
+			}); 
+
+			$('#vacancy').novacancy({
+				'blink': 1,
+				'off': 1,
+				'color': 'white',
+				'glow': ['0 0 80px Red', '0 0 30px FireBrick', '0 0 6px DarkRed']
+			});
+      $('#vacancy1').novacancy({
+				'blink': 1,
+				'off': 1,
+				'color': 'black',
+				'glow': ['0 0 80px white', '0 0 30px FireBrick', '0 0 6px DarkWhite']
+			});
+      $('#score').novacancy({
+				'blink': 1,
+				'off': 1,
+				'color': 'white',
+				'glow': ['0 0 80px white', '0 0 30px FireBrick', '0 0 6px DarkWhite']
+			});
+		});
+	</script>
+    <style>
+
+        @font-face {
+            font-size: 100px;
+            color: white;
+            font-family: SCDream6;
+            src: url("{% static 'fonts/SCDream6.otf' %}") format('truetype');
+        }
+        #vacancy {
+            font-family:SCDream6;
+            font-size: 40px;
+            text-shadow: 0 15px 25px rgb(0, 0, 0);
+        }
+        .btn {
+            top:70%;
+            left:45%;
+            position:absoulte;
+            height:100px;
+            width:200px;
+            font-size:50px;
+        }
+    </style>
+
+
 </head>
 <!-- <body data-vide-bg="{{movies.trailer}}"></body> -->
 <style>
@@ -39,13 +101,13 @@
     src: url("{% static 'fonts/SCDream6.otf' %}") format('truetype');
   }
   p {
-    font-size: 50px;
+    font-size: 100px;
     color: white;
     font-family: SCDream6;
     text-shadow: 0 5px 15px rgb(0, 0, 0);
   }
   h1  {
-    font-size: 20px;
+    font-size: 15px;
     color: rgb(255, 253, 231);
     font-family: SCDream6;
     text-shadow: 0 5px 15px rgb(0, 0, 0);
@@ -64,14 +126,14 @@
   }
   .like,
   .likes {
-    font-size: 20px;
+    font-size: 15px;
     color: rgb(255, 66, 66);
     font-family: SCDream6;
     text-shadow: 0 5px 15px rgb(0, 0, 0);
   }
-  .nav-item {
-    font-size: 40px;
-    color: rgb(0, 0, 0);
+  .nav-link {
+    font-size: 20px;
+    color: #ffffff;
     font-family: SCDream6;
     text-shadow: 0 5px 15px rgb(0, 0, 0);
   }
@@ -93,9 +155,47 @@
     color:white;
   }
   hr {
-    height:15%;
+    height:5%;
     opacity:0;
   }
+  .alert {
+    top:10px;
+    width:120px;
+    height:40px;
+  }
+  #vacancy {
+    font-size:80px;
+  }
+  #vacancy1 {
+    font-size:15px;
+  }
+  input {
+    color:white;
+    font-size: 20px;
+  }
+  #delete {
+    font-size:13px;
+    width:70px;
+    height:30px;
+  }
+  .review {
+    font-size:15px;
+  }
+  .reviewbox {
+    position: absolute;
+    left:6%;
+    bottom:5%;
+    padding: 4px;
+    border: 1px solid #FFFFFF;
+    background: rgba(10, 10, 10, 0.7);
+    overflow: auto;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+
 </style>
 <body>
   <ul class="nav justify-content-end fixed-top">
@@ -125,22 +225,29 @@
     </div>
     <div class='container'>
       <hr>
-      <p>{{movie.title}}/{{movie.genre_id.name}}</p>
+      <p id='vacancy'>{{movie.title}}</p>
+      <p id='vacancy1' class="alert alert-light mx-auto" role="alert">{{movie.genre_id.name}}</p>
       <!-- <img src="{{movie.poster_url}}" alt="" width="100px"> -->
       <h2 class='num'>{{movie.audience}}만명</h2>
-      <h1>{{movie.description}}</h1>
-      <hr>
       <h2 class='likes' id="like-count">{{movie.like_users.count}}명이 좋아합니다.</h2>
-      {% if user in movie.like_users.all%}
+      {% if user in likemovie.like_users.all%}
       <i id="like-button" data-id="{{movie.id}}" data-user="{{user}}" class="fas fa-heart fa-2x"
         style="color: red; cursor: pointer;"></i>
       {% else %}
       <i id="like-button" data-id="{{movie.id}}" data-user="{{user}}" class="far fa-heart fa-2x"
         style="color: red; cursor: pointer;"></i>
+      
       {% endif %}
+      
+      <hr>
+      <h1>{{movie.description}}</h1>
+      
+      <div class="reviewbox">
       <br> {% for review in reviews %} {# Each "contact" is a Contact model object. #}
-      <b>{{ review.score }}점 한줄평: {{review.content}} </b>
-      <a class="btn btn-outline-secondary" href="{% url 'movies:review_delete' movie.id review.id %}" role="button">delete</a>
+      <p class="review">{{review.user_id.username}}: {{review.content}}
+      <span id="score" style="font-size:25px;"> {{ review.score }}점</span>
+      <a id="delete" class="btn btn-outline-secondary" href="{% url 'movies:review_delete' movie.id review.id %}" role="button">delete</a>
+      </p>
       <br /> {% endfor %}
       <div class="pagination">
         <span class="step-links">
@@ -173,14 +280,19 @@
             <br>
             <textarea name="content" id="content" cols="30" rows="1"></textarea>
             {% if user == movie_review_user %}
-            <input type="submit" value="평점수정하기">
+            <input type="submit" value="수정" style="background-color:transparent;">
             {% else %}
-            <input type="submit" value="평점달기">
+            <input type="submit" value="입력" style="color:white; background-color:transparent;">
             {% endif %}
           </form>
           <br>
         </span>
       </div>
+      
+      
+      </div>
+
+      
     </div>
 </body>
 <script>
