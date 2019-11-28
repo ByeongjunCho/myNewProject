@@ -38,6 +38,7 @@ SECRET_KEY = config('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'decouple',
     'accounts',
     'movies',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -138,7 +138,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 LIGIN_URL = '/accounts/login/'
 AUTH_USER_MODEL = 'accounts.User'
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group+models': True,
-}
+# GRAPH_MODELS = {
+#   'all_applications': True,
+#   'graph_models': True,
+# }
