@@ -15,18 +15,19 @@
         .me {
             top: 20px;
             left: 5px;
-            font-size: 15px;
+            font-size: 25px;
             margin-left: 5px;
         }
+        
         #menu {
-            position:absolute;
-            top:5px;
-            left:2%;
+            position: absolute;
+            top: 5px;
+            left: 2%;
         }
+        
         .nav {
-            top:5px;
+            top: 5px;
         }
-
     </style>
 
     <meta charset="UTF-8">
@@ -91,24 +92,24 @@
             <li data-menuanchor="SF" class="active"><a href="#SF" class="me">SF</a></li>
         </ul>
         <li class="nav-item">
-            <a class="nav-link  " href="{% url 'movies:index' %}">HOME</a>
+            <a class="nav-link  " href="{% url 'movies:index' %} " style="text-decoration:none">HOME</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:profile' user.pk %}">{{ user.username }} </a>
+            <a class="nav-link" href="{% url 'accounts:profile' user.pk %}" style="text-decoration:none">{{ user.username }} </a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a>
+            <a class="nav-link" href="{% url 'accounts:logout' %} " style="text-decoration:none">LOGOUT</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:profile' user.pk %}">PROFILE</a>
+            <a class="nav-link" href="{% url 'accounts:profile' user.pk %}" style="text-decoration:none">PROFILE</a>
         </li>
         {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:signup' %}">SIGNUP</a>
+            <a class="nav-link" href="{% url 'accounts:signup' %}" style="text-decoration:none">SIGN UP</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a>
+            <a class="nav-link" href="{% url 'accounts:login' %}" style="text-decoration:none">LOGIN</a>
         </li>
         {% endif %}
     </ul>

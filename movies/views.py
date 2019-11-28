@@ -121,12 +121,3 @@ def star(request, movie_id):
     movie = get_object_or_404(Movie,pk=movie_id)
     score = int(eval(request.body.decode("utf-8"))['score'])
     # embed()
-def test(request):
-    movies = Movie.objects.all()
-    genres = Genre.objects.all()
-    context = {
-        'movies':movies,
-    }
-    for i, v in enumerate(genres):
-        context.update({'genre'+str(i) : v})
-    return render(request,'movies/test.html',context)
