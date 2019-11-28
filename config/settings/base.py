@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,8 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 LIGIN_URL = '/accounts/login/'
 AUTH_USER_MODEL = 'accounts.User'
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group+models': True,
+}
